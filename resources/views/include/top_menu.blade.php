@@ -10,7 +10,7 @@
             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="la la-building-o"></i><span>Case</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="dropdown-item" href="/titleClearances" >File for Title Clearance</a></li>
-                    <li><a class="dropdown-item" href="/applications" >Property Applications</a></li>
+                    <li><a class="dropdown-item" href="/propertyApplications" >Property Applications</a></li>
                 </ul>
             </li>
             <li class="dropdown nav-item" data-menu="dropdown"><a class="dropdown-toggle nav-link" href="#" data-toggle="dropdown"><i class="la la-television"></i><span>Operators</span></a>

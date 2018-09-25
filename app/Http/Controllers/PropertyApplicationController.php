@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PropertyApplication;
 use Illuminate\Http\Request;
 use Auth;
+use DataTables;
 
 class PropertyApplicationController extends Controller
 {
@@ -111,7 +112,6 @@ class PropertyApplicationController extends Controller
     {
         $propertyApplications = PropertyApplication::all();
 
-
         return DataTables::of($propertyApplications)
             ->addColumn('view',function ($propertyApplication){
                 return '<button type="button" class="delete btn btn-sm btn-success" 
@@ -119,6 +119,7 @@ class PropertyApplicationController extends Controller
             })
             ->addColumn('edit',function ($propertyApplication){
                 return '<button type="button" class="edit btn btn-sm btn-primary" 
+                data-id="'.$propertyApplication->id.'" 
                 data-property-case-id="'.$propertyApplication->property_case_id.'" 
                 data-sub-registrar="'.$propertyApplication->sub_registrar.'" 
                 data-applicant-name="'.$propertyApplication->applicant_name.'" 
@@ -126,6 +127,7 @@ class PropertyApplicationController extends Controller
                 data-dastavej-details="'.$propertyApplication->dastavej_details.'" 
                 data-dastavej-lakhiapnar="'.$propertyApplication->dastavej_lakhiapnar.'" 
                 data-dastavej-lakhilenar="'.$propertyApplication->dastavej_lakhilenar.'" 
+                data-property-description="'.$propertyApplication->property_description.'" 
                 data-property-address-office="'.$propertyApplication->property_address_office.'" 
                 data-dastavej-date="'.$propertyApplication->dastavej_date.'" 
                 data-search-year-from="'.$propertyApplication->search_year_from.'" 

@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Carbon;
 
+
 class PropertyApplication extends Model
 {
     protected $fillable = ['property_case_id','sub_registrar','applicant_name','applicant_address','dastavej_details','dastavej_lakhiapnar','dastavej_lakhilenar','property_description','property_address_office','dastavej_date','search_year_from','search_year_upto','search_application_no','search_fee','actual_payment','extra_expense','payment_details','note','user_id'];

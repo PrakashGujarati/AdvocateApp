@@ -4,8 +4,9 @@
 
 @section('head')
     <!-- BEGIN Page Level CSS-->
-    <link rel="stylesheet" type="text/css" href="dist/app-assets/vendors/css/tables/datatable/datatables.min.css">
-    <link rel="stylesheet" type="text/css" href="dist/app-assets/vendors/css/extensions/sweetalert.css">
+    <link rel="stylesheet" type="text/css" href="{{asset("dist/app-assets/vendors/css/tables/datatable/datatables.min.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("dist/app-assets/vendors/css/tables/extensions/responsive.dataTables.min.css")}}">
+    <link rel="stylesheet" type="text/css" href="{{asset("dist/app-assets/vendors/css/extensions/sweetalert.css")}}">
     <link rel="stylesheet" type="text/css" href="{{asset('dist/app-assets/vendors/datetimepicker/jquery.datetimepicker.css')}}"/>
 @stop
 
@@ -14,8 +15,6 @@
 
     <!-- Main -->
     <section id="main">
-
-
         <div class="row">
             <div class="col-12">
                 <div class="card">
@@ -32,10 +31,11 @@
                     <div class="card-content collpase show">
                         <div class="card-body card-dashboard">
 
-                            <table class="table table-striped table-bordered dynamic-table">
+                            <table class="table table-striped table-bordered responsive dynamic-table">
                                 <thead>
                                 <tr>
                                     <th>Case</th>
+                                    <th>Sub Registarar</th>
                                     <th>Applicant Name</th>
                                     <th>Dastavej LakhiApnar</th>
                                     <th>Dastavej LakhaviLenar</th>
@@ -307,13 +307,13 @@
 @section('js_script')
 
     <!-- BEGIN PAGE LEVEL JS-->
-    <script type="text/javascript" src="dist/app-assets/js/scripts/ui/breadcrumbs-with-stats.js"></script>
-    <script src="dist/app-assets/js/scripts/modal/components-modal.js" type="text/javascript"></script>
+    <script type="text/javascript" src="{{asset('dist/app-assets/js/scripts/ui/breadcrumbs-with-stats.js')}}"></script>
+    <script src="{{asset('dist/app-assets/js/scripts/modal/components-modal.js')}}" type="text/javascript"></script>
     <script src="{{asset('dist/app-assets/vendors/js/tables/datatable/datatables.min.js')}}" type="text/javascript"></script>
 
-    <script src="dist/app-assets/js/scripts/forms/validation/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="{{asset('dist/app-assets/js/scripts/forms/validation/jquery.validate.min.js')}}" type="text/javascript"></script>
 
-    <script src="dist/app-assets/vendors/js/extensions/sweetalert.min.js" type="text/javascript"></script>
+    <script src="{{asset('dist/app-assets/vendors/js/extensions/sweetalert.min.js')}}" type="text/javascript"></script>
     <!-- END PAGE LEVEL JS-->
     <script src="{{asset('dist/app-assets/vendors/datetimepicker/build/jquery.datetimepicker.full.min.js')}}" type="text/javascript"></script>
 
@@ -352,7 +352,7 @@
                     if (isConfirm) {
                         $.ajax(
                             {
-                                url: "titleClearances/" + id,
+                                url: "/propertyApplications/" + id,
                                 type: 'POST',
                                 data: {
                                     "id": id,
@@ -378,37 +378,56 @@
 
         /* RETRIVE DATA For Editing Purpose */
         $(document).on('click', '.edit', function () {
-
             var id = $(this).data("id");
-            var inward_no = $(this).data("inward-no");
-            var inwarddate = $(this).data("inwarddate");
-            var property_owner_name = $(this).data("property-owner-name");
-            var borrower_name = $(this).data("borrower-name");
-            var bank_manager_name = $(this).data("bank-manager-name");
-            var bank_id = $(this).data("bank-id");
-            var bank_branch = $(this).data("bank-branch");
-            var bank_facilities = $(this).data("bank-facilities");
+            var property_case_id = $(this).data("property-case-id");
+            var sub_registrar = $(this).data("sub-registrar");
+            var applicant_name = $(this).data("applicant-name");
+            var applicant_address = $(this).data("applicant-address");
+            var dastavej_details = $(this).data("dastavej-details");
+            var dastavej_lakhiapnar = $(this).data("dastavej-lakhiapnar");
+            var dastavej_lakhilenar = $(this).data("dastavej-lakhilenar");
             var property_description = $(this).data("property-description");
+            var property_address_office = $(this).data("property-address-office");
+            var dastavej_date = $(this).data("dastavej-date");
+            var search_year_from = $(this).data("search-year-from");
+            var search_year_upto = $(this).data("search-year-upto");
+            var search_application_no = $(this).data("search-application-no");
+            var search_fee = $(this).data("search-fee");
+            var actual_payment = $(this).data("actual-payment");
+            var extra_expense = $(this).data("extra-expense");
+            var payment_details = $(this).data("payment_details");
+            var note = $(this).data("note");
 
-            $('#editform #inward_no').val(inward_no);
-            $('#editform #inwarddate').val(inwarddate);
-            $('#editform #property_owner_name').val(property_owner_name);
-            $('#editform #borrower_name').val(borrower_name);
-            $('#editform #bank_id').val(bank_id);
-            $('#editform #bank_branch').val(bank_branch);
-            $('#editform #bank_manager_name').val(bank_manager_name);
-            $('#editform #bank_facilities').val(bank_facilities);
+            $('#editform #property_case_id').val(property_case_id);
+            $('#editform #sub_registrar').val(sub_registrar);
+            $('#editform #applicant_name').val(applicant_name);
+            $('#editform #applicant_address').val(applicant_address);
+            $('#editform #dastavej_details').val(dastavej_details);
+            $('#editform #dastavej_lakhiapnar').val(dastavej_lakhiapnar);
+            $('#editform #dastavej_lakhilenar').val(dastavej_lakhilenar);
             $('#editform #property_description').val(property_description);
-            $('#editform').attr('action', 'titleClearances/' + id);
+            $('#editform #property_address_office').val(property_address_office);
+            $('#editform #dastavej_date').val(dastavej_date);
+            $('#editform #search_year_from').val(search_year_from);
+            $('#editform #search_year_upto').val(search_year_upto);
+            $('#editform #search_application_no').val(search_application_no);
+            $('#editform #actual_payment').val(actual_payment);
+            $('#editform #search_fee').val(search_fee);
+            $('#editform #extra_expense').val(extra_expense);
+            $('#editform #payment_details').val(payment_details);
+            $('#editform #note').val(note);
+            $('#editform').attr('action', 'propertyApplications/' + id);
             $('#editmodel').modal('show');
         });
 
         $(document).ready(function (e) {
 
             mytable = $('.dynamic-table').DataTable({
+
+                order: [1, 'asc'],
                 "processing": true,
                 "serverSide": true,
-                "ajax": "{{ url('titleClearances/getDataTable') }}",
+                "ajax": "{{ url('/propertyApplications/getDataTable') }}",
                 columns: [
                     {data: "property_case_id"},
                     {data: "sub_registrar"},
@@ -420,7 +439,17 @@
                     {data: "view"},
                     {data: "edit"},
                     {data: "delete"}
-                ]
+                ],
+                responsive: {
+                    details: {
+                        type: 'column'
+                    }
+                },
+                columnDefs: [{
+                    className: 'control',
+                    orderable: false,
+                    targets: 0
+                }],
             });
 
             /* ADD Record using AJAX Requres */
